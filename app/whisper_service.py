@@ -13,19 +13,15 @@ def transcribe_audio(file_path, model_name="base", language="Portuguese"):
     result = model.transcribe(file_path, language=language)
     return result
 
+
 def detect_language(file_path, model_name="base"):
     model = load_model(model_name)
 
-    audio = whisper.load_audio(file_path)
-    audio = whisper.pad_or_trim(audio)
+    result = model.transcribe(file_path, language=None)
 
-    mel = whisper.log_mel_spectrogram(audio).to(model.device)
-    _, probs = model.detect_language(mel)
-
-    language = max(probs, key=probs.get)
     return {
-        "detected_language": language,
-        "probabilities": probs
+        "detected_language": result.get("language", "unknown"),
+        "probabilities": result.get("language_probs", {})
     }
 
 def smart_transcribe(file_path, model_name="base", language=None):
