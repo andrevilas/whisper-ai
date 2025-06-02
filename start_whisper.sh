@@ -43,7 +43,7 @@ mkdir -p "$CACHE_DIR"
 echo "📦 Verificando se a imagem '$APP_IMAGE' existe..."
 if ! docker images | grep -q "$APP_IMAGE"; then
     echo "🔧 Imagem '$APP_IMAGE' não encontrada. Iniciando build automático..."
-    docker build -t $APP_IMAGE .
+    docker build --no-cache -t $APP_IMAGE .
 fi
 echo "✅ Imagem '$APP_IMAGE' pronta."
 
