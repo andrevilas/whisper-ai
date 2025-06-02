@@ -4,6 +4,7 @@ set -e
 
 APP_IMAGE="whisper-api-gpu"
 AUDIO_DIR="$(pwd)/audios"
+PORT=${1:-8000}
 
 echo "🔍 Verificando se o Docker está instalado..."
 if ! command -v docker &> /dev/null; then
@@ -52,5 +53,6 @@ echo "✅ Imagem '$APP_IMAGE' encontrada."
 echo "🚀 Iniciando container da aplicação Whisper com GPU..."
 docker run --rm --gpus all \
     -v "$AUDIO_DIR":/app/audios \
-    -p 8000:8000 \
+    -p $PORT:8000 \
     $APP_IMAGE
+

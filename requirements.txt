@@ -1,4 +1,4 @@
 fastapi
 uvicorn[standard]
-whisper
-torch
+python-multipart
+git+https://github.com/openai/whisper.git
