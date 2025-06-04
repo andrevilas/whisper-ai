@@ -2,7 +2,11 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import PlainTextResponse, JSONResponse
 import tempfile
 import shutil
-from app.whisper_service import transcribe_audio, detect_language, smart_transcribe
+from app.whisper_service import (
+    transcribe_audio,
+    detect_language,
+    smart_transcribe,
+)
 from app.enums import WhisperModel, SupportedLanguage
 from typing import Optional
 
@@ -25,10 +29,6 @@ async def transcribe(
     )
     return result["text"]
 
-
-
-from typing import Optional
-from app.enums import WhisperModel, SupportedLanguage
 
 @app.post("/transcribe/segments", response_class=JSONResponse)
 async def transcribe_with_segments(
